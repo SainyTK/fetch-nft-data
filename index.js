@@ -1,17 +1,17 @@
-import cheerio from "cheerio";
-import axios from "axios";
-import express from "express";
-import cors from "cors";
+const cheerio = require("cheerio");
+const axios = require("axios");
+const express = require("express");
+const cors = require("cors");
 
-type DataPayload = {
-  floorPrice: string;
-  change24h: string;
-  marketCap: string;
-  vol24h: string;
-  owners: string;
-  owners24h: string;
-  totalAssets: string;
-};
+// type DataPayload = {
+//   floorPrice: string;
+//   change24h: string;
+//   marketCap: string;
+//   vol24h: string;
+//   owners: string;
+//   owners24h: string;
+//   totalAssets: string;
+// };
 
 const fetchNFTData = async () => {
   const url = `https://www.coingecko.com/en/nft`;
@@ -19,7 +19,7 @@ const fetchNFTData = async () => {
 
   const $ = cheerio.load(html);
 
-  const result: Record<string, DataPayload> = {};
+  const result = {};
 
   for (let i = 1; i < 100; i++) {
     const wrapper = $(
@@ -51,7 +51,7 @@ const app = express();
 const PORT = 4200;
 app.use(cors());
 
-app.get("/", async (req: express.Request, res: express.Response) => {
+app.get("/", async (req, res) => {
   const result = await fetchNFTData();
   res.send(result);
 });
