@@ -48,7 +48,7 @@ const fetchNFTData = async () => {
 };
 
 const app = express();
-const PORT = 4200;
+const PORT = 3000;
 app.use(cors());
 
 app.get("/", async (req, res) => {
